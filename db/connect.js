@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
-const connectionString =
-  ;
+// const connectionString =
 
 /* mongoose
   .connect(connectionString, {
@@ -15,13 +14,12 @@ const connectionString =
  */
 
 const connectDB = (url) => {
-    return mongoose
-  .connect(url, {
+  return mongoose.connect(url, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
-  })
-}
+  });
+};
 
 module.exports = connectDB;
