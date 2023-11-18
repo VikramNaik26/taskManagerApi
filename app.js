@@ -3,6 +3,8 @@ const express = require("express");
 const app = express();
 const connectDB = require("./db/connect");
 require("dotenv").config();
+const notFound = require("./middleware/notFound");
+const errorHandlerMiddleware = require("./middleware/errorHandler");
 
 const tasks = require("./routes/tasks");
 
@@ -10,14 +12,18 @@ const tasks = require("./routes/tasks");
 app.use(express.static("./public"));
 app.use(express.json());
 
-const port = 3000;
-
 // routes
 /* app.get("/hello", (req, res) => {
   res.send("Task Manager App");
 }); */
 
 app.use("/api/v1/tasks", tasks);
+
+app.use(notFound);
+app.use(errorHandlerMiddleware);
+
+// const port = 3000; // hardcoded value
+const port = process.env.PORT || 3000;
 
 // app.get('/api/v1/tasks') - gets all the tasks
 // app.post('/api/v1/tasks') - creates a new task
